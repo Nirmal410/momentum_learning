@@ -1,9 +1,12 @@
 package com.nirmal.momentum.controller;
 
-import com.nirmal.momentum.dto.AuthResponse;
+import com.nirmal.momentum.common.ApiResponse;
 import com.nirmal.momentum.dto.SignupRequest;
+import com.nirmal.momentum.dto.UserResponse;
 import com.nirmal.momentum.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,12 +20,9 @@ public class AuthController {
             value = "/signup",
             consumes = {"multipart/form-data"}
     )
-    public AuthResponse signup(
-            @ModelAttribute SignupRequest request
-    ) {
+    public ResponseEntity<ApiResponse<UserResponse>> signup(
+            @Valid @ModelAttribute SignupRequest request) {
 
-        return authService.signup(request);
-
+        return ResponseEntity.ok(authService.signup(request));
     }
-
 }
