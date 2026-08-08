@@ -1,0 +1,536 @@
+/* ===== Dashboard layout ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.dashboard-grid-bottom {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 22px;
+    align-items: start;
+}
+
+.dashboard-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ===== Topics with Deadlines ===== */
+.dashboard-topics-deadlines {
+    padding: 20px 22px;
+}
+
+.topic-deadline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.topic-deadline-item {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 13px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    transition: all .15s ease;
+}
+.topic-deadline-item:hover {
+    background: var(--color-bg-soft);
+    border-color: var(--color-border-strong);
+}
+.topic-deadline-item.td-completed {
+    background: linear-gradient(180deg, #f0fdf4 0%, #fff 100%);
+    border-color: #bbf7d0;
+}
+.topic-deadline-item.td-due {
+    background: linear-gradient(180deg, #fef2f2 0%, #fff 100%);
+    border-color: #fecaca;
+}
+
+.td-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: var(--color-accent-soft);
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.topic-deadline-item.td-completed .td-icon { background: var(--color-success-soft); color: #065f46; }
+.topic-deadline-item.td-due       .td-icon { background: var(--color-danger-soft);  color: #991b1c; }
+.topic-deadline-item.td-upcoming  .td-icon { background: var(--color-warning-soft); color: #92400e; }
+
+.td-main {
+    min-width: 0;
+}
+.td-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    word-break: break-word;
+}
+.td-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.td-status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    background: var(--color-bg-soft);
+    color: var(--color-text-muted);
+}
+.td-status-completed { background: var(--color-success-soft); color: #065f46; }
+.td-status-due       { background: var(--color-danger-soft);  color: #991b1b; }
+.td-status-upcoming  { background: var(--color-warning-soft); color: #92400e; }
+.td-status-pending   { background: var(--color-bg-soft);      color: var(--color-text-muted); }
+
+.td-progress-count {
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    font-weight: 500;
+}
+.td-progress-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+.td-progress-fill {
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 999px;
+    transition: width .3s ease;
+}
+.td-progress-fill.fill-done    { background: var(--color-success); }
+.td-progress-fill.fill-warning { background: var(--color-warning); }
+.td-progress-fill.fill-danger  { background: var(--color-danger); }
+
+.td-deadline {
+    text-align: right;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+.td-deadline-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+.td-deadline-days {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+.td-days-completed { background: var(--color-success-soft); color: #065f46; }
+.td-days-due       { background: var(--color-danger-soft);  color: #991b1b; }
+.td-days-upcoming  { background: var(--color-warning-soft); color: #92400e; }
+.td-days-pending   { background: var(--color-bg-soft);      color: var(--color-text-muted); }
+
+/* ===== StatCard ===== */
+.stat-card {
+    padding: 20px 22px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    position: relative;
+    overflow: hidden;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.stat-card::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    width: 4px; height: 100%;
+    background: var(--color-border-strong);
+}
+.stat-card-default::after  { background: var(--color-text-subtle); }
+.stat-card-info::after     { background: var(--color-accent); }
+.stat-card-success::after  { background: var(--color-success); }
+.stat-card-warning::after  { background: var(--color-warning); }
+.stat-card-danger::after   { background: var(--color-danger); }
+
+.stat-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+.stat-card-top h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    margin: 0;
+}
+.stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--color-bg-soft);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.stat-card-info     .stat-icon { background: var(--color-accent-soft);  color: #1e40af; }
+.stat-card-success  .stat-icon { background: var(--color-success-soft); color: #065f46; }
+.stat-card-warning  .stat-icon { background: var(--color-warning-soft); color: #92400e; }
+.stat-card-danger   .stat-icon { background: var(--color-danger-soft);  color: #991b1b; }
+
+.stat-card-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+}
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--color-text);
+}
+.stat-card-info     .stat-value { color: #1e40af; }
+.stat-card-success  .stat-value { color: #065f46; }
+.stat-card-warning  .stat-value { color: #92400e; }
+.stat-card-danger   .stat-value { color: #991b1b; }
+
+.stat-trend {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+}
+.stat-trend-up   { background: var(--color-success-soft); color: #065f46; }
+.stat-trend-down { background: var(--color-danger-soft);  color: #991b1b; }
+
+/* ===== react-calendar theme override ===== */
+.dashboard-calendar {
+    padding: 20px 22px;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+}
+.cal-title {
+    margin-bottom: 12px;
+}
+.cal-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+.cal-legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.react-calendar {
+    width: 100%;
+    border: none !important;
+    background: #f1f5f9 !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    font-family: var(--font-sans) !important;
+    color: var(--color-text) !important;
+}
+.react-calendar__navigation {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+.react-calendar__navigation button {
+    background: transparent !important;
+    color: var(--color-text) !important;
+    border-radius: 8px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+.react-calendar__navigation button:hover {
+    background: #e2e8f0 !important;
+}
+.react-calendar__navigation button:disabled {
+    opacity: .5 !important;
+}
+.react-calendar__month-view__weekdays {
+    color: var(--color-text-subtle);
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .04em !important;
+    margin-bottom: 4px;
+}
+.react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none !important;
+    border: none !important;
+}
+.react-calendar__tile {
+    padding: 10px 4px !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 4px;
+    min-height: 58px !important;
+    aspect-ratio: unset !important;
+    transition: all 0.15s ease !important;
+}
+.react-calendar__tile:enabled:hover {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+}
+.react-calendar__tile--now {
+    background: #f0fdf4 !important;
+    color: #16a34a !important;
+    font-weight: 700 !important;
+    border: 1px solid #bbf7d0 !important;
+}
+.react-calendar__tile--now:enabled:hover {
+    background: #dcfce7 !important;
+}
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: #16a34a !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35) !important;
+}
+.react-calendar__tile--active .cal-dot {
+    filter: brightness(2) saturate(0.5);
+}
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: var(--color-border-strong) !important;
+}
+.react-calendar__month-view__days__day--weekend abbr {
+    color: var(--color-text-muted);
+}
+
+.cal-dots {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    min-height: 6px;
+    flex-wrap: wrap;
+}
+.cal-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    padding: 0 2px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 6px;
+}
+.cal-dot:empty { min-width: 6px; width: 6px; }
+.cal-dot-deadline { background: #dc2626; }
+.cal-dot-leetcode { background: #059669; }
+.cal-dot:not(:empty) {
+    height: 12px;
+    border-radius: 6px;
+    font-size: 9px;
+    padding: 0 4px;
+    min-width: 14px;
+}
+
+/* ===== Recent Activity ===== */
+.recent-activity {
+    padding: 20px 22px;
+    min-height: 520px;
+}
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    transition: background .15s ease;
+}
+.activity-item:hover { background: var(--color-bg-soft); }
+.activity-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+.act-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.act-icon-info    { background: var(--color-accent-soft);  color: #1e40af; }
+.act-icon-success { background: var(--color-success-soft); color: #065f46; }
+.act-icon-warning { background: var(--color-warning-soft); color: #92400e; }
+.act-icon-danger  { background: var(--color-danger-soft);  color: #991b1b; }
+.act-icon-leetcode{ background: #dcfce7; color: #166534; }
+.activity-meta { min-width: 0; }
+.activity-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.35;
+}
+.activity-sub {
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    margin-top: 2px;
+}
+.activity-right { flex-shrink: 0; }
+
+/* ===== Add Topic form / modal ===== */
+.btn-sm {
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+.form-alert {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+.form-alert-error {
+    background: var(--color-danger-soft);
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+.form-alert-success {
+    background: var(--color-success-soft);
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.add-topic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.subtopics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.subtopic-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.subtopic-tick {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 2px solid var(--color-border-strong);
+    background: #fff;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0;
+    transition: all .15s ease;
+}
+.subtopic-tick:hover:not(:disabled) {
+    border-color: var(--color-accent);
+}
+.subtopic-tick.checked {
+    background: var(--color-success);
+    border-color: var(--color-success);
+}
+.subtopic-remove {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-text-subtle);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all .15s ease;
+}
+.subtopic-remove:hover:not(:disabled) {
+    background: var(--color-danger-soft);
+    color: #991b1b;
+}
+
+/* ===== Responsive breakpoints ===== */
+@media (max-width: 1180px) {
+    .stats-grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .stat-value { font-size: 26px; }
+}
+@media (max-width: 1060px) {
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .dashboard-grid-bottom { grid-template-columns: 1fr; }
+    .recent-activity { min-height: auto; }
+}
+@media (max-width: 680px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-value { font-size: 24px; }
+    .cal-legend { flex-direction: column; gap: 4px; }
+}

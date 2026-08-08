@@ -21,5 +21,7 @@ public final class Constants {
 
     public static final String APPLICATION_DOCX =
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    public static final String SESSION_USER = "USER_ID";
+
 
 }
