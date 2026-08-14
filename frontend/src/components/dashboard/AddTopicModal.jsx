@@ -103,6 +103,7 @@ export default function AddTopicModal({ isOpen, onClose, onSuccess }) {
                         type="date"
                         className="input"
                         value={deadline}
+                        min={new Date().toISOString().split("T")[0]}
                         onChange={(e) => setDeadline(e.target.value)}
                         disabled={submitting}
                     />

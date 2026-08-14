@@ -31,7 +31,14 @@ public class User {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] profilePicture;
 
+    @Builder.Default
+    @Column(nullable = false)
+    private String role = "USER";
+
+    @Builder.Default
+    @Column(nullable = false)
+    private String status = "ACTIVE";
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
 }

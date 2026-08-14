@@ -62,16 +62,33 @@ public class LeetcodeServiceImpl implements LeetcodeService {
         MultipartFile screenshot = request.getCodeScreenshot();
 
         if (screenshot != null && !screenshot.isEmpty()) {
-            if (!fileValidator.isValidImage(screenshot)) {
-                throw new BadRequestException("Code screenshot must be a JPG or PNG under 5MB.");
+            if (!fileValidator.isValidCodeFile(screenshot)) {
+                throw new BadRequestException("Code file must be a .java, .txt, code file, or image under 5MB.");
             }
             codeScreenshot = readBytes(screenshot);
             codeType = screenshot.getContentType();
+            if (codeType == null || codeType.equals("application/octet-stream")) {
+                String filename = screenshot.getOriginalFilename();
+                if (filename != null && filename.endsWith(".java")) {
+                    codeType = "text/x-java-source";
+                } else if (filename != null && filename.endsWith(".txt")) {
+                    codeType = "text/plain";
+                } else {
+                    codeType = "text/plain";
+                }
+            }
         }
+
+        String platform = (request.getPlatform() != null && !request.getPlatform().trim().isEmpty()) 
+                ? request.getPlatform().trim() : "LeetCode";
+        String difficulty = (request.getDifficulty() != null && !request.getDifficulty().trim().isEmpty()) 
+                ? request.getDifficulty().trim().toUpperCase() : "MEDIUM";
 
         LeetcodeEntry entry = LeetcodeEntry.builder()
                 .user(user)
                 .problemTitle(request.getProblemTitle().trim())
+                .platform(platform)
+                .difficulty(difficulty)
                 .notes(request.getNotes())
                 .taskPhoto(taskPhoto)
                 .taskPhotoContentType(taskPhotoType)

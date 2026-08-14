@@ -10,6 +10,10 @@ public class LeetcodeRequest {
     @NotBlank(message = "Problem title is required")
     private String problemTitle;
 
+    private String platform;
+
+    private String difficulty;
+
     private String notes;
 
     private MultipartFile taskPhoto;

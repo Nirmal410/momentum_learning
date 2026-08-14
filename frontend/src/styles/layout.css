@@ -211,7 +211,27 @@
 }
 .navbar-search input::placeholder { color: var(--color-text-subtle); }
 .navbar-search input:focus {
-  background: #fff;
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+}
+
+.navbar-theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  margin-right: 4px;
+}
+.navbar-theme-btn:hover {
+  background: var(--color-surface);
   border-color: var(--color-border-strong);
 }
 

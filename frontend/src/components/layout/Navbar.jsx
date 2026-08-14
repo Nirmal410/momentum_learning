@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState, useContext } from "react";
-import { FaGraduationCap, FaSearch, FaCog, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { FaGraduationCap, FaSearch, FaCog, FaSignOutAlt, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useTheme } from "../../context/ThemeContext";
 import { logout as logoutApi, currentUser } from "../../api/authService";
 
 import "../../styles/layout.css";
 
 export default function Navbar() {
     const { user, setUser } = useContext(AuthContext);
+    const { darkMode, toggleTheme } = useTheme();
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState(null);
@@ -49,10 +51,14 @@ export default function Navbar() {
 
     const pages = [
         { title: "Dashboard", path: "/dashboard" },
-        { title: "LeetCode", path: "/leetcode" },
+        { title: "Problem Solving", path: "/leetcode" },
         { title: "Progress", path: "/progress" },
         { title: "History", path: "/history" },
     ];
+
+    if (user?.role === "ADMIN") {
+        pages.push({ title: "Admin Portal", path: "/admin" });
+    }
 
     const handleLogout = async () => {
         setMenuOpen(false);
@@ -97,6 +103,16 @@ export default function Navbar() {
                     }}
                 />
             </div>
+
+            <button
+                className="navbar-theme-btn"
+                onClick={toggleTheme}
+                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                aria-label="Toggle Theme"
+            >
+                {darkMode ? <FaSun style={{ color: "#fbbf24", fontSize: "1.1rem" }} /> : <FaMoon style={{ color: "#4f46e5", fontSize: "1.1rem" }} />}
+                <span className="navbar-theme-text">{darkMode ? "Light" : "Dark"}</span>
+            </button>
 
             <div className="navbar-profile" ref={ref}>
                 <button

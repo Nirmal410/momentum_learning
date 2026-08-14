@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaCode, FaChartLine, FaHistory, FaCog, FaQuestionCircle, FaPlus, FaTachometerAlt } from "react-icons/fa";
+import { FaCode, FaChartLine, FaHistory, FaCog, FaQuestionCircle, FaPlus, FaTachometerAlt, FaUserShield } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useAddTopicModal } from "../../context/AddTopicModalContext";
@@ -12,10 +12,14 @@ export default function Sidebar({ onAddTopic }) {
 
     const menu = [
         { title: "Dashboard", icon: <FaTachometerAlt />, path: "/dashboard" },
-        { title: "LeetCode", icon: <FaCode />, path: "/leetcode" },
+        { title: "Problem Solving", icon: <FaCode />, path: "/leetcode" },
         { title: "Progress", icon: <FaChartLine />, path: "/progress" },
         { title: "History", icon: <FaHistory />, path: "/history" },
     ];
+
+    if (user?.role === "ADMIN") {
+        menu.push({ title: "Admin Portal", icon: <FaUserShield />, path: "/admin" });
+    }
 
     return (
         <aside className="sidebar">

@@ -16,6 +16,8 @@ public class LeetcodeResponse {
 
     private Long id;
     private String problemTitle;
+    private String platform;
+    private String difficulty;
     private String notes;
     private LocalDate entryDate;
     private LocalDateTime createdAt;
@@ -23,4 +25,5 @@ public class LeetcodeResponse {
     private boolean hasCodeScreenshot;
     private String photoUrl;
     private String codeScreenshotUrl;
+    private String codeScreenshotContentType;
 }

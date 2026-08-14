@@ -63,17 +63,21 @@ public class AuthServiceImpl implements AuthService {
             }
         }
 
+        String role = userRepository.count() == 0 ? "ADMIN" : "USER";
+
         User user = User.builder()
                 .name(request.getName().trim())
                 .email(request.getEmail().trim().toLowerCase())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .profilePicture(profilePicture)
+                .role(role)
+                .status("ACTIVE")
                 .createdAt(LocalDateTime.now())
                 .build();
 
         userRepository.save(user);
 
-        log.info("New user registered: {}", user.getEmail());
+        log.info("New user registered with role {}: {}", user.getRole(), user.getEmail());
 
         String token = jwtUtil.generateToken(user.getId(), user.getEmail());
 
@@ -97,6 +101,10 @@ public class AuthServiceImpl implements AuthService {
                 request.getPassword(),
                 user.getPassword())) {
             throw new BadRequestException("Invalid email or password");
+        }
+
+        if ("INACTIVE".equalsIgnoreCase(user.getStatus())) {
+            throw new BadRequestException("Your account has been deactivated. Please contact administrator.");
         }
 
         log.info("User logged in: {}", user.getEmail());

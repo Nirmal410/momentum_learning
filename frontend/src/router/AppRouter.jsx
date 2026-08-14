@@ -5,8 +5,10 @@ import Dashboard from "../pages/Dashboard";
 import Leetcode from "../pages/Leetcode";
 import Progress from "../pages/Progress";
 import History from "../pages/History";
+import Admin from "../pages/Admin";
 
 import ProtectedRoute from "../components/ProtectedRoute";
+import AdminRoute from "../components/AdminRoute";
 
 export default function AppRouter() {
 
@@ -48,6 +50,15 @@ export default function AppRouter() {
                         <ProtectedRoute>
                             <History />
                         </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin"
+                    element={
+                        <AdminRoute>
+                            <Admin />
+                        </AdminRoute>
                     }
                 />
             </Routes>

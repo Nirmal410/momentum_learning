@@ -1,0 +1,426 @@
+/* ==============================
+   Weekly Learning Streak Card
+   ============================== */
+
+.streak-card {
+    padding: 22px 26px 20px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid var(--color-border, #e2e8f0);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top accent bar */
+.streak-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed, #059669);
+    border-radius: 12px 12px 0 0;
+}
+
+/* ── Header ── */
+.streak-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.streak-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.streak-title h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text, #0f172a);
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+
+.streak-fire-emoji {
+    font-size: 20px;
+    animation: flame-pulse 2s ease-in-out infinite;
+}
+
+@keyframes flame-pulse {
+    0%, 100% { transform: scale(1) rotate(-3deg); }
+    50%       { transform: scale(1.15) rotate(3deg); }
+}
+
+.streak-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+/* ── Stats Row ── */
+.streak-stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.streak-stat {
+    flex: 1;
+    padding: 14px 12px;
+    background: var(--color-bg, #f8fafc);
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.streak-stat:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+.streak-stat-value {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    color: #4f46e5;
+}
+
+.streak-stat-value.streak-fire {
+    color: #ea580c;
+}
+
+.streak-stat-value.streak-trophy {
+    color: #d97706;
+}
+
+.streak-stat-label {
+    font-size: 11px;
+    color: var(--color-text-muted, #64748b);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+}
+
+/* ── 7-Day Dots ── */
+.streak-week-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 10px;
+}
+
+.streak-dots {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.streak-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+}
+
+.streak-dot {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+}
+
+.streak-dot:hover {
+    transform: scale(1.1);
+}
+
+/* Active day — green */
+.streak-dot.is-active {
+    background: #dcfce7;
+    border: 1.5px solid #86efac;
+    color: #16a34a;
+    font-weight: 700;
+}
+
+/* Today (active) — indigo/primary */
+.streak-dot.is-today.is-active {
+    background: #eef2ff;
+    border: 2px solid #6366f1;
+    color: #4f46e5;
+    font-weight: 800;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+    animation: today-ring 2s ease-in-out infinite;
+}
+
+/* Today (not yet active) — dashed indigo */
+.streak-dot.is-today:not(.is-active) {
+    background: #f5f3ff;
+    border: 2px dashed #818cf8;
+    color: #6366f1;
+    animation: today-pulse 2s ease-in-out infinite;
+}
+
+/* Past missed day */
+.streak-dot.is-missed {
+    background: #fff1f2;
+    border: 1.5px solid #fca5a5;
+    color: #ef4444;
+    font-size: 11px;
+}
+
+/* Future day */
+.streak-dot.is-future {
+    background: var(--color-bg, #f8fafc);
+    border: 1.5px solid var(--color-border, #e2e8f0);
+    color: var(--color-border, #e2e8f0);
+}
+
+@keyframes today-ring {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12); }
+    50%       { box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.18); }
+}
+
+@keyframes today-pulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.15); }
+    50%       { box-shadow: 0 0 0 5px rgba(129, 140, 248, 0.25); }
+}
+
+.streak-dot-day {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.streak-dot-day.is-today-label {
+    color: #4f46e5;
+    font-weight: 700;
+}
+
+/* ── Streak Progress Bar ── */
+.streak-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.streak-progress-bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 99px;
+    background: var(--color-border, #e2e8f0);
+    overflow: hidden;
+}
+
+.streak-progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #4f46e5, #059669);
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.streak-progress-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-muted, #64748b);
+    white-space: nowrap;
+}
+
+/* ==============================
+   Celebration Overlay (Confetti)
+   ============================== */
+
+.streak-celebration-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.streak-toast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 40px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid var(--color-border, #e2e8f0);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(79, 70, 229, 0.12);
+    animation: toast-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+               toast-out 0.4s ease-in 2.8s forwards;
+}
+
+.streak-toast-big {
+    padding: 32px 52px;
+    border: 2px solid #c7d2fe;
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: scale(0.7) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes toast-out {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.85) translateY(-10px); }
+}
+
+.streak-toast-emoji {
+    font-size: 40px;
+    animation: emoji-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.streak-toast-big .streak-toast-emoji { font-size: 56px; }
+
+@keyframes emoji-bounce {
+    from { transform: scale(0) rotate(-20deg); }
+    to   { transform: scale(1) rotate(0deg); }
+}
+
+.streak-toast-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color-text, #0f172a);
+    margin: 0;
+    text-align: center;
+}
+
+.streak-toast-big .streak-toast-title {
+    font-size: 24px;
+    color: #4f46e5;
+}
+
+.streak-toast-msg {
+    font-size: 13px;
+    color: var(--color-text-muted, #64748b);
+    text-align: center;
+    margin: 0;
+}
+
+/* ── Confetti Particles ── */
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: -20px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    0%   { transform: translateY(0) rotateZ(0deg); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotateZ(720deg); opacity: 0; }
+}
+
+/* ==========================================
+   Dark Mode Overrides for Streak Components
+   ========================================== */
+
+body.dark-theme .streak-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .streak-title h3 {
+    color: #f8fafc;
+}
+
+body.dark-theme .streak-badge {
+    background: rgba(79, 70, 229, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: #a5b4fc;
+}
+
+body.dark-theme .streak-stat {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-theme .streak-stat:hover {
+    background: #334155;
+    border-color: #475569;
+}
+
+body.dark-theme .streak-stat-label,
+body.dark-theme .streak-week-label,
+body.dark-theme .streak-dot-day,
+body.dark-theme .streak-progress-text {
+    color: #94a3b8;
+}
+
+body.dark-theme .streak-dot.is-active {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #4ade80;
+    color: #4ade80;
+}
+
+body.dark-theme .streak-dot.is-today.is-active {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: #818cf8;
+    color: #a5b4fc;
+}
+
+body.dark-theme .streak-dot.is-today:not(.is-active) {
+    background: rgba(129, 140, 248, 0.15);
+    border-color: #818cf8;
+    color: #818cf8;
+}
+
+body.dark-theme .streak-dot.is-missed {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #f87171;
+    color: #f87171;
+}
+
+body.dark-theme .streak-dot.is-future {
+    background: #0f172a;
+    border-color: #334155;
+    color: #475569;
+}
+
+body.dark-theme .streak-toast {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}

@@ -26,6 +26,12 @@ public class LeetcodeEntry {
     @Column(nullable = false)
     private String problemTitle;
 
+    @Builder.Default
+    private String platform = "LeetCode";
+
+    @Builder.Default
+    private String difficulty = "MEDIUM";
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String notes;

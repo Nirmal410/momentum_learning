@@ -307,3 +307,98 @@
     .subtopic-item { flex-direction: column; }
     .subtopic-actions { align-self: stretch; flex-direction: row; justify-content: space-between; }
 }
+
+/* ==========================================
+   Dark Mode Overrides for Progress Page
+   ========================================== */
+
+body.dark-theme .filter-tab {
+    background: #1e293b;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+body.dark-theme .filter-tab:hover {
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+body.dark-theme .filter-tab:not(.active) .filter-tab-count {
+    background: #0f172a;
+    color: #94a3b8;
+}
+
+body.dark-theme .topic-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .topic-card.is-due {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+body.dark-theme .topic-card.is-due .topic-card-header {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.15) 0%, #1e293b 100%);
+}
+
+body.dark-theme .topic-card.is-completed .topic-card-header {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.15) 0%, #1e293b 100%);
+}
+
+body.dark-theme .topic-card-header:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark-theme .topic-title h3 {
+    color: #f8fafc;
+}
+
+body.dark-theme .topic-card.is-completed .topic-deadline {
+    color: #4ade80;
+}
+
+body.dark-theme .topic-card.is-due .topic-deadline {
+    color: #f87171;
+}
+
+body.dark-theme .topic-progress-pct.completed {
+    color: #4ade80;
+}
+
+body.dark-theme .topic-progress-pct.due {
+    color: #f87171;
+}
+
+body.dark-theme .topic-card.expanded .topic-subtopics-wrap {
+    border-top-color: #334155;
+}
+
+body.dark-theme .subtopic-item {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-theme .subtopic-item:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+body.dark-theme .subtopic-item.is-checked {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+body.dark-theme .subtopic-name {
+    color: #f8fafc;
+}
+
+body.dark-theme .subtopic-completed-at,
+body.dark-theme .subtopic-notes-info {
+    color: #94a3b8;
+}
+
+body.dark-theme .subtopic-tick {
+    background: #0f172a;
+    border-color: #475569;
+}

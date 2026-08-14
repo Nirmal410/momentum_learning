@@ -12,6 +12,7 @@ import StatCard from "../components/dashboard/StateCard";
 import Calendar from "../components/dashboard/Calendar";
 import RemainderCard from "../components/dashboard/RemainderCard";
 import TopicsWithDeadlines from "../components/dashboard/TopicsWithDeadlines";
+import WeeklyStreak from "../components/dashboard/WeeklyStreak";
 import Loader from "../components/common/Loader";
 import { dashboardService } from "../api/dashboardService";
 import { useAddTopicModal } from "../context/AddTopicModalContext";
@@ -118,6 +119,9 @@ export default function Dashboard() {
                     ))}
                 </div>
             )}
+
+            {/* Weekly Streak */}
+            <WeeklyStreak onRefreshKey={refreshKey} />
 
             {/* Calendar + Recent Activity (side by side) */}
             <div className="dashboard-grid-bottom">

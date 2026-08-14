@@ -16,6 +16,8 @@ public class LeetcodeMapper {
         return LeetcodeResponse.builder()
                 .id(entry.getId())
                 .problemTitle(entry.getProblemTitle())
+                .platform(entry.getPlatform() != null ? entry.getPlatform() : "LeetCode")
+                .difficulty(entry.getDifficulty() != null ? entry.getDifficulty() : "MEDIUM")
                 .notes(entry.getNotes())
                 .entryDate(entry.getEntryDate())
                 .createdAt(entry.getCreatedAt())
@@ -23,6 +25,7 @@ public class LeetcodeMapper {
                 .hasCodeScreenshot(hasCode)
                 .photoUrl(hasPhoto ? "/api/leetcode/" + entry.getId() + "/photo" : null)
                 .codeScreenshotUrl(hasCode ? "/api/leetcode/" + entry.getId() + "/code-screenshot" : null)
+                .codeScreenshotContentType(entry.getCodeScreenshotContentType())
                 .build();
     }
 }

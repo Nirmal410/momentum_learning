@@ -13,4 +13,7 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
 
     @Query("select distinct t from Topic t left join fetch t.subtopics where t.user.id = :userId")
     List<Topic> findAllWithSubtopicsByUserId(@Param("userId") Long userId);
+
+    @Query("select distinct t from Topic t left join fetch t.subtopics")
+    List<Topic> findAllWithSubtopics();
 }
