@@ -57,7 +57,7 @@ export default function Navbar() {
     ];
 
     if (user?.role === "ADMIN") {
-        pages.push({ title: "Admin Portal", path: "/admin" });
+        pages.unshift({ title: "Admin Portal", path: "/admin" });
     }
 
     const handleLogout = async () => {

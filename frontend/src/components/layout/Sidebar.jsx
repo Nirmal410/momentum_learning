@@ -18,7 +18,7 @@ export default function Sidebar({ onAddTopic }) {
     ];
 
     if (user?.role === "ADMIN") {
-        menu.push({ title: "Admin Portal", icon: <FaUserShield />, path: "/admin" });
+        menu.unshift({ title: "Admin Portal", icon: <FaUserShield />, path: "/admin" });
     }
 
     return (
